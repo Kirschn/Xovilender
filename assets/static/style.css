@@ -2,7 +2,7 @@ body {
     background-image: url(img/back.png);
     background-repeat: repeat;
     font-family: Verdana, Arial, sans-serif;
-    font-size: 18pt;
+    font-size: 12pt;
     min-width: 600px !important;
 }
 #wrapper {
@@ -11,8 +11,8 @@ body {
     left:17.7%;
     width: calc(64.5% - 230px);
     background-color: #373737;
-    padding: 10px;
-    padding-top: calc((200px - 3*18pt)/2);
+    padding: 20px;
+    /* padding-top: calc((200px - 3*18pt)/2); */
     color: #ffffff;
     z-index: 0;
     min-height: 220px;
@@ -40,7 +40,13 @@ a {
     background-color: #373737;
     min-width: 600px !important;
 }
-.calendarDate {
-    height: 50px;
-    width: 50px;
+table, tr, td {
+    border: 3px solid black;
+}
+td, tr {
+    height:5%;
+    width: 5%;
+}
+.calendarNull {
+    color: #979797;
 }
