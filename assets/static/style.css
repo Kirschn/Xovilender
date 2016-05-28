@@ -1,6 +1,7 @@
 body {
     background-image: url(img/back.png);
     background-repeat: repeat;
+    font-family: Verdana, Arial, sans-serif;
     font-size: 18pt;
     min-width: 600px !important;
 }
@@ -11,7 +12,6 @@ body {
     width: calc(64.5% - 230px);
     background-color: #373737;
     padding: 10px;
-    padding-left: 220px;
     padding-top: calc((200px - 3*18pt)/2);
     color: #ffffff;
     z-index: 0;
@@ -40,6 +40,7 @@ a {
     background-color: #373737;
     min-width: 600px !important;
 }
-.calendar {
-
+.calendarDate {
+    height: 50px;
+    width: 50px;
 }
