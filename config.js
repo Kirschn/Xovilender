@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
     sqlHost: "localhost",
     sqlUser: "xovilender",
     sqlPass: "",
