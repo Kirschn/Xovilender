@@ -61,7 +61,7 @@ if (cluster.isMaster) {
     app.get('/', function (req, res) {
         var template = fs.readFileSync("assets/html/main.html", "utf8");
         
-        res.send('Hello World!');
+        res.send('<html><table>' + buildstring + '</table></html>');
     });
     app.listen(config.webPort, function () {
         console.log('Example app listening on port ' + config.webPort + '!');
