@@ -22,7 +22,7 @@ if (cluster.isMaster) {
 } else {
     // Workers can share any TCP connection
     // In this case it is an HTTP server
-    var cal = new calendar.Calendar(calendar.SUNDAY);
+    var cal = new calendar.Calendar(calendar.MONDAY);
     var d = new Date();
     var currMonth = d.getMonth() + 1;
     var currDay = d.getDay();
