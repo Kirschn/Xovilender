@@ -5,7 +5,7 @@ body {
     font-size: 12pt;
     min-width: 600px !important;
     height: 100%;
-    width:100%
+    width:100%;
 }
 #wrapper {
     position: absolute;
@@ -52,7 +52,10 @@ tr {
 td {
     height: 5%;
 }
-
+.calendarDate {
+    height:100pt;
+    width:100pt;
+}
 .calendarNull {
     color: #979797;
 }
