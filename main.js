@@ -34,6 +34,7 @@ if (cluster.isMaster) {
     var currDay = d.getDay();
     var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
     sqlconnection.query("SELECT day, type, image, desc, link FROM events WHERE month=" + mysql.escape(currMonth) + ";", function (err, results) {
+        if (err) throw err;
         var events = results;
         var buildstring = "";
         table.forEach(function (currWeekArray) {
