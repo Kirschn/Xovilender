@@ -4,6 +4,8 @@ body {
     font-family: Verdana, Arial, sans-serif;
     font-size: 12pt;
     min-width: 600px !important;
+    height: 100%;
+    width:100%
 }
 #wrapper {
     position: absolute;
