@@ -60,7 +60,8 @@ if (cluster.isMaster) {
     app.use(express.static('assets/static'));
     app.get('/', function (req, res) {
         var template = fs.readFileSync("assets/html/main.html", "utf8")
-            .replace("[[TABLE]]", buildstring);
+            .replace("[[TABLE]]", buildstring)
+            .replace("[[HEADER]]", calendar.month_name[currMonth]);
         
         res.send(template);
         res.end();

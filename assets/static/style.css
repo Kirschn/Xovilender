@@ -52,6 +52,11 @@ tr {
 td {
     height: 5%;
 }
+.headerContainer {
+    width: 420pt;
+    height: 30pt;
+    font-size: 46pt;
+}
 .calendarDate {
     height:60pt;
     width:60pt;
