@@ -26,7 +26,7 @@ if (cluster.isMaster) {
     var d = new Date();
     var currMonth = d.getMonth() + 1;
     var currDay = d.getDay();
-    var table = new cal.monthdayscalendar(d.getFullYear(), currMonth);
+    var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
     var events = [
         {
             day: 40,
