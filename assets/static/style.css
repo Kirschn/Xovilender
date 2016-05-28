@@ -54,8 +54,10 @@ td {
 }
 .headerContainer {
     width: 420pt;
-    height: 30pt;
+    height: 70pt;
     font-size: 46pt;
+    text-align: center;
+    
 }
 .calendarDate {
     height:60pt;

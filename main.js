@@ -20,6 +20,12 @@ if (cluster.isMaster) {
         console.log("worker ${worker.process.pid} died");
     });
 } else {
+    var sqlconnection = mysql.createConnection({
+        host: config.sqlHost,
+        user: config.sqlUser,
+        database: config.sqlUser,
+        password: config.sqlPass
+    });
     // Workers can share any TCP connection
     // In this case it is an HTTP server
     var cal = new calendar.Calendar(calendar.MONDAY);
@@ -27,47 +33,45 @@ if (cluster.isMaster) {
     var currMonth = d.getMonth() + 1;
     var currDay = d.getDay();
     var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
-    var events = [
-        {
-            day: 40,
-            month: 1
-        }
-    ]; // TODO: QUERY EVENTS SELECT day, month, id, name, desc FROM config.sqlEventTable
-    var buildstring = "";
-    table.forEach(function (currWeekArray) {
-        buildstring += "<tr>";
-       currWeekArray.forEach(function (currDayIteration) {
-           if (currDayIteration !== 0) {
-               events.forEach(function (currEvent) {
-                   if (currEvent.day == currDayIteration && currEvent.month == currMonth) {
-                       buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
-                       buildstring += "</td>";
-                   } else {
-                       // lol kein event
-                       buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
-                       buildstring += "</td>";
-                   }
-               });
-           } else {
-               buildstring += "<td><div class='calendarNull'>" + currDayIteration + "</div>";
-               buildstring += "</td>";
-           }
-       });
-        buildstring += "</tr>"
-    });
+    sqlconnection.query("SELECT day, type, image, desc, link FROM events WHERE month=" + mysql.escape(currMonth) + ";", function (err, results) {
+        var events = results;
+        var buildstring = "";
+        table.forEach(function (currWeekArray) {
+            buildstring += "<tr>";
+            currWeekArray.forEach(function (currDayIteration) {
+                if (currDayIteration !== 0) {
+                    events.forEach(function (currEvent) {
+                        if (currEvent.day == currDayIteration && currEvent.month == currMonth) {
+                            buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div> (event)";
+                            buildstring += "</td>";
+                        } else {
+                            // lol kein event
+                            buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
+                            buildstring += "</td>";
+                        }
+                    });
+                } else {
+                    buildstring += "<td><div class='calendarNull'>" + currDayIteration + "</div>";
+                    buildstring += "</td>";
+                }
+            });
+            buildstring += "</tr>"
+        });
 
-    var app = express();
-    app.use(express.static('assets/static'));
-    app.get('/', function (req, res) {
-        var template = fs.readFileSync("assets/html/main.html", "utf8")
-            .replace("[[TABLE]]", buildstring)
-            .replace("[[HEADER]]", calendar.month_name[currMonth]);
-        
-        res.send(template);
-        res.end();
-    });
-    app.listen(config.webPort, function () {
-        console.log('Example app listening on port ' + config.webPort + '!');
+        var app = express();
+        app.use(express.static('assets/static'));
+        app.get('/', function (req, res) {
+            var template = fs.readFileSync("assets/html/main.html", "utf8")
+                .replace("[[TABLE]]", buildstring)
+                .replace("[[HEADER]]", calendar.month_name[currMonth]);
+
+            res.send(template);
+            res.end();
+        });
+        app.listen(config.webPort, function () {
+            console.log('Example app listening on port ' + config.webPort + '!');
+        });
+
     });
 
 
