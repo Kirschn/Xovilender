@@ -44,7 +44,7 @@ if (cluster.isMaster) {
                        buildstring += "</td>";
                    } else {
                        // lol kein event
-                       buildstring += "<td>";
+                       buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
                        buildstring += "</td>";
                    }
                });
