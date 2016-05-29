@@ -36,17 +36,23 @@ if (cluster.isMaster) {
     sqlconnection.query("SELECT day, type, image, `desc`, link FROM events WHERE month=" + mysql.escape(currMonth) + ";", function (err, results) {
         if (err) throw err;
         var events = results;
+        console.log(results);
         var buildstring = "";
         table.forEach(function (currWeekArray) {
+            console.log("Current Week Array: " + currWeekArray);
             buildstring += "<tr>";
             currWeekArray.forEach(function (currDayIteration) {
+                console.log("Current Day Array: " + currDayIteration);
                 if (currDayIteration !== 0) {
                     events.forEach(function (currEvent) {
+
                         if (currEvent.day == currDayIteration && currEvent.month == currMonth) {
+                            console.log("Event");
                             buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div> (event)";
                             buildstring += "</td>";
                         } else {
                             // lol kein event
+                            console.log("No Event");
                             buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
                             buildstring += "</td>";
                         }
