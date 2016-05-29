@@ -33,7 +33,7 @@ if (cluster.isMaster) {
     var currMonth = d.getMonth() + 1;
     var currDay = d.getDay();
     var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
-    sqlconnection.query("SELECT day, type, image, `desc`, link FROM events WHERE month=" + mysql.escape(currMonth) + ";", function (err, results) {
+    sqlconnection.query("SELECT day, type, image, `desc`, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + ";", function (err, results) {
         if (err) throw err;
         var events = results;
         console.log(results);
@@ -46,7 +46,7 @@ if (cluster.isMaster) {
                 if (currDayIteration !== 0) {
                     events.forEach(function (currEvent) {
 
-                        if (currEvent.day == currDayIteration && currEvent.month == currMonth) {
+                        if (currEvent.day == currDayIteration) {
                             console.log("Event");
                             buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div> (event)";
                             buildstring += "</td>";
