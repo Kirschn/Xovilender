@@ -48,7 +48,7 @@ if (cluster.isMaster) {
 
                         if (currEvent.day == currDayIteration) {
                             console.log("Event");
-                            buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div> (event)";
+                            buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div><div class='calendarEvent'><img src='' alt=''></div>";
                             buildstring += "</td>";
                         } else {
                             // lol kein event
