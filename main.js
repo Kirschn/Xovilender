@@ -37,6 +37,13 @@ if (cluster.isMaster) {
         if (err) throw err;
         var events = results;
         console.log(results);
+        results.push({
+           day: 40,
+            type: "initiator",
+            image: "404.jpeg",
+            desc: "lol you should not see this",
+            link: "http://kirschn.de"
+        });
         var buildstring = "";
         table.forEach(function (currWeekArray) {
             console.log("Current Week Array: " + currWeekArray);
