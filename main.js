@@ -51,7 +51,7 @@ if (cluster.isMaster) {
             currWeekArray.forEach(function (currDayIteration) {
                 console.log("Current Day Array: " + currDayIteration);
                 if (currDayIteration !== 0) {
-                    buildstring += "<td><div class='calendarDate'>" + currDayIteration + "</div>";
+                    buildstring += "<td><div class='calendarDate'>" + currDayIteration + "";
                     events.forEach(function (currEvent) {
 
                         if (currEvent.day == currDayIteration) {
@@ -60,7 +60,7 @@ if (cluster.isMaster) {
                                 currEvent.image + "'></a></div>";
                         }
                     });
-                    buildstring += "</td>";
+                    buildstring += "</div></td>";
                 } else {
                     buildstring += "<td><div class='calendarNull'>" + currDayIteration + "</div>";
                     buildstring += "</td>";
