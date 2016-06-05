@@ -60,10 +60,11 @@ td {
     
 }
 .calendarDate {
-    height:60pt;
-    width:60pt;
+    height:100px;
+    width:100px;
 }
 .calendarEvent {
+    text-align: center;
     height: 100%;
     width: 100%;
 }
