@@ -63,6 +63,10 @@ td {
     height:60pt;
     width:60pt;
 }
+.calendarEvent {
+    height: 100%;
+    width: 100%;
+}
 .calendarNull {
     color: #979797;
     height:60pt;
