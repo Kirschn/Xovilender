@@ -56,8 +56,8 @@ if (cluster.isMaster) {
 
                         if (currEvent.day == currDayIteration) {
                             console.log("Event");
-                            buildstring += "<div class='calendarEvent'><a href='" + currEvent.desc + "'><img src='" +
-                                currEvent.image + "' alt='" + currEvent.desc + "'></a></div>";
+                            buildstring += "<div class='calendarEvent'><a href='" + currEvent.link + "' title='" + currEvent.desc + "'><img src='" +
+                                currEvent.image + "'></a></div>";
                         }
                     });
                     buildstring += "</td>";
