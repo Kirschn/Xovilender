@@ -74,3 +74,8 @@ td {
     height:60pt;
     width:60pt;
 }
+.rightbar {
+    position: relative;
+    right: 0;
+
+}

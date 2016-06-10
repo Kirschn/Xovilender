@@ -62,7 +62,7 @@ if (cluster.isMaster) {
                     });
                     buildstring += "</div></td>";
                 } else {
-                    buildstring += "<td><div class='calendarNull'>" + currDayIteration + "</div>";
+                    buildstring += "<td><div class='calendarNull'>&nbsp;</div>";
                     buildstring += "</td>";
                 }
             });
