@@ -73,7 +73,7 @@ if (cluster.isMaster) {
         for (i = 0; i < 3; i++) {
             console.log("For loop!");
             if (results[i] !== undefined) {
-                nextup += "<div class='nextupentry'>" + results[i].day + "." + results[i].month  +"<div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].desc + "</div>";
+                nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].desc + "</div>";
                 nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100%; width: 100%;' src='" + results[i].image + "'></div></div>";
             }
         }
