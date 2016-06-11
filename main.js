@@ -71,6 +71,7 @@ if (cluster.isMaster) {
 
         var nextup = "";
         for (i = 0; i++; i < 3) {
+            console.log("For loop!");
             if (results[i] !== undefined) {
                 nextup += "<div class='nextupentry'>" + results[i].day + "." + results[i].month  +"<div id='nextupdesc'>" +  results[i].desc + "</div>";
                 nextup += "<div class='nextuplogo'>" + results[i].image + "</div></div>";
