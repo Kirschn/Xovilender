@@ -85,9 +85,9 @@ td {
     width: 200px;
 }
 .nextupentry {
-
+    position: absolute;
     margin-bottom: 5px;
     background-color: #2a2a2a;
-    width: calc(100% - 10px);
-    height: 50px;
+    width: 100%;
+    height: 100px;
 }
