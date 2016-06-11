@@ -95,7 +95,8 @@ td {
 }
 .legendetext {
     position: relative;
-    left: 100px;
+    left: 105px;
     height: 90px;
     line-height: 90px;
+    top: -95px;
 }
