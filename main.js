@@ -33,7 +33,7 @@ if (cluster.isMaster) {
     var currMonth = d.getMonth() + 1;
     var currDay = d.getDay();
     var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
-    sqlconnection.query("SELECT day, type, image, `desc`, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;", function (err, results) {
+    sqlconnection.query("SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;", function (err, results) {
         if (err) throw err;
         var events = results;
         console.log(results);
@@ -74,7 +74,7 @@ if (cluster.isMaster) {
             console.log("For loop!");
             if (results[i] !== undefined) {
                 nextup += "<div class='nextupentry'>" + results[i].day + "." + results[i].month  +"<div id='nextupdesc'>" +  results[i].desc + "</div>";
-                nextup += "<div class='nextuplogo'>" + results[i].image + "</div></div>";
+                nextup += "<div class='nextuplogo'><img src='" + results[i].image + "'></div></div>";
             }
         }
         console.log("Next Up:" + nextup);
