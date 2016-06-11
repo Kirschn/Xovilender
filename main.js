@@ -70,12 +70,13 @@ if (cluster.isMaster) {
         });
 
         var nextup = "";
-        for (i = 0; i++; i == 2) {
+        for (i = 0; i++; i < 3) {
             if (results[i] !== undefined) {
                 nextup += "<div class='nextupentry'>" + results[i].day + "." + results[i].month  +"<div id='nextupdesc'>" +  results[i].desc + "</div>";
                 nextup += "<div class='nextuplogo'>" + results[i].image + "</div></div>";
             }
         }
+        console.log("Next Up:" + nextup);
         var template = fs.readFileSync("assets/html/main.html", "utf8")
             .replace("[[TABLE]]", buildstring)
             .replace("[[HEADER]]", calendar.month_name[currMonth])
