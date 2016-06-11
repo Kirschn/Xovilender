@@ -77,5 +77,6 @@ td {
 .rightbar {
     position: relative;
     right: 0;
+    border-left: 4px #1e1e1e solid;
 
 }
