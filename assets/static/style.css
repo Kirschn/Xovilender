@@ -8,6 +8,7 @@ body {
     width:100%;
 }
 #wrapper {
+    float: left;
     position: absolute;
     top: 7.6%;
     left:17.7%;
@@ -75,8 +76,10 @@ td {
     width:60pt;
 }
 .rightbar {
-    position: relative;
-    right: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 780px;
     border-left: 4px #1e1e1e solid;
 
 }
