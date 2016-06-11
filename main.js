@@ -84,8 +84,8 @@ if (cluster.isMaster) {
            var legende = "";
             types.forEach(function (currentType) {
                legende +=  "<div class='nextupentry'>";
-                legende += "<div class='nextuplogo'><img style='height: 100%;' src='" + currentType.image + "'></div><h2>";
-                legende += currentType.desc + "</h2></div>"
+                legende += "<div class='nextuplogo'><img style='height: 100%;' src='" + currentType.image + "'></div>";
+                legende += currentType.desc + "</div>"
 
             });
             console.log("Next Up:" + nextup);
