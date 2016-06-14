@@ -1,15 +1,15 @@
 /**
  * Created by mcwmc on 28.05.2016.
  */
-var config = require("./config.js");
 var express = require("express");
 var fs = require("fs");
+var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var http = require("http");
 var mysql = require("mysql");
 var calendar = require('node-calendar');
 const numCPUs = require('os').cpus().length;
 const cluster = require('cluster');
-
+var token = Math.floor(Math.random() * 1234);
 if (cluster.isMaster) {
     // Fork workers.
     for (var i = 0; i < numCPUs; i++) {
