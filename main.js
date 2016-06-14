@@ -1,9 +1,9 @@
 /**
  * Created by mcwmc on 28.05.2016.
  */
+var config = require("./config.js");
 var express = require("express");
 var fs = require("fs");
-var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var http = require("http");
 var mysql = require("mysql");
 var calendar = require('node-calendar');
@@ -26,15 +26,14 @@ if (cluster.isMaster) {
         database: config.sqlUser,
         password: config.sqlPass
     });
-    var template = "";
     // Workers can share any TCP connection
     // In this case it is an HTTP server
-    function reload () {
-        var cal = new calendar.Calendar(calendar.MONDAY);
-        var d = new Date();
-        var currMonth = d.getMonth() + 1;
-        var currDay = d.getDay();
-        var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
+    function reloadtemplate() {
+        cal = new calendar.Calendar(calendar.MONDAY);
+        d = new Date();
+        currMonth = d.getMonth() + 1;
+        currDay = d.getDay();
+        table = cal.monthdayscalendar(d.getFullYear(), currMonth);
         sqlconnection.query("SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;", function (err, results) {
             if (err) throw err;
             var events = results;
@@ -96,10 +95,75 @@ if (cluster.isMaster) {
                     .replace("[[HEADER]]", calendar.month_name[currMonth])
                     .replace("[[NEXTUP]]", nextup)
                     .replace("[[LEGENDE]]", legende);
-    });
-            reload();
-            setInterval(reload(), 5000);
 
+            });
+    })};
+    var cal = new calendar.Calendar(calendar.MONDAY);
+    var d = new Date();
+    var currMonth = d.getMonth() + 1;
+    var currDay = d.getDay();
+    var table = cal.monthdayscalendar(d.getFullYear(), currMonth);
+    sqlconnection.query("SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;", function (err, results) {
+        if (err) throw err;
+        var events = results;
+        console.log(results);
+        if (results[0] == undefined) {
+            results.push({
+                day: 40,
+                type: "initiator",
+                image: "404.jpeg",
+                desc: "lol you should not see this",
+                link: "http://kirschn.de"
+            });
+        }
+
+        var buildstring = "";
+        table.forEach(function (currWeekArray) {
+            console.log("Current Week Array: " + currWeekArray);
+            buildstring += "<tr>";
+            currWeekArray.forEach(function (currDayIteration) {
+                console.log("Current Day Array: " + currDayIteration);
+                if (currDayIteration !== 0) {
+                    buildstring += "<td><div class='calendarDate'>" + currDayIteration + "";
+                    events.forEach(function (currEvent) {
+
+                        if (currEvent.day == currDayIteration) {
+                            console.log("Event");
+                            buildstring += "<div class='calendarEvent'><a href='" + currEvent.link + "' title='" + currEvent.desc + "'><img src='" +
+                                currEvent.image + "'></a></div>";
+                        }
+                    });
+                    buildstring += "</div></td>";
+                } else {
+                    buildstring += "<td><div class='calendarNull'>&nbsp;</div>";
+                    buildstring += "</td>";
+                }
+            });
+            buildstring += "</tr>"
+        });
+
+        var nextup = "";
+        for (i = 0; i < 3; i++) {
+            console.log("For loop!");
+            if (results[i] !== undefined) {
+                nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].type + "</div>";
+                nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100%; width: 100%;' src='" + results[i].image + "'></div></div>";
+            }
+        }
+        sqlconnection.query("SELECT DISTINCT image, `desc` FROM events", function (err, types) {
+           var legende = "";
+            types.forEach(function (currentType) {
+               legende +=  "<div class='nextupentry'>";
+                legende += "<div class='nextuplogo'><img style='height: 100%;' src='" + currentType.image + "'></div>";
+                legende += "<div class='legendetext'>" + currentType.desc + "</div></div>"
+
+            });
+            console.log("Next Up:" + nextup);
+            var template = fs.readFileSync("assets/html/main.html", "utf8")
+                .replace("[[TABLE]]", buildstring)
+                .replace("[[HEADER]]", calendar.month_name[currMonth])
+                .replace("[[NEXTUP]]", nextup)
+                .replace("[[LEGENDE]]", legende);
             var app = express();
             app.use(express.static('assets/static'));
             app.get('/', function (req, res) {
@@ -113,6 +177,7 @@ if (cluster.isMaster) {
         });
 
 
+    });
 
 
-}}
+}
