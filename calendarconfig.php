@@ -9,7 +9,7 @@
 $config = json_decode(file_get_contents("config.json"), true);
 $sqlconnection = mysqli_connect($config["sqlHost"], $config["sqlUser"], $config["sqlPass"], $config["sqlDatabase"]);
 if (isset($_GET["delete"])) {
-    mysqli_query($sqlconnection, "DELETE FROM ". $config["sqlTable"] . " WHERE id= " . mysqli_real_escape_string($sqlconnection, $_GET["delete"]));
+    mysqli_query($sqlconnection, "DELETE FROM ". $config["sqlEventTable"] . " WHERE id=" . mysqli_real_escape_string($sqlconnection, $_GET["delete"]));
 }
 
 $events = mysqli_query($sqlconnection, "SELECT * FROM events;");
@@ -21,7 +21,30 @@ $events = mysqli_query($sqlconnection, "SELECT * FROM events;");
     <title>WUNDERSCHÖNE MANAGEMENT SEITE</title>
 </head>
 <body>
-<table>
+<table border="1">
+    <tr>
+        <td>
+            ID
+        </td>
+        <td>
+            DAY
+        </td>
+        <td>
+            MONTH
+        </td>
+        <td>
+            TYPE
+        </td>
+        <td>
+            IMAGEURL
+        </td>
+        <td>
+            ONCLICKLINK
+        </td>
+        <td>
+            ACTION
+        </td>
+    </tr>
 <?php
 while ($r = mysqli_fetch_assoc($events)) {
     ?>
