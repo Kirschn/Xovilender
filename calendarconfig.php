@@ -6,16 +6,6 @@
  * Date: 14.06.2016
  * Time: 16:39
  */
-session_start();
-if(!isset($_SESSION["kbot_managementbot"])) {
-    echo "NO SESSION";
-    die();
-    } else {
-    if ($_SESSION["kbot_managementbot"] !== "#xovigin") {
-        echo "WRONG BOT";
-        die();
-    }
-}
 $config = json_decode(file_get_contents("config.json"), true);
 $sqlconnection = mysqli_connect($config["sqlHost"], $config["sqlUser"], $config["sqlPass"], $config["sqlDatabase"]);
 if (isset($_GET["delete"])) {
