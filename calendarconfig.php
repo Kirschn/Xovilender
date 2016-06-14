@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Created by PhpStorm.
@@ -10,4 +11,46 @@ $sqlconnection = mysqli_connect($config["sqlHost"], $config["sqlUser"], $config[
 if (isset($_GET["delete"])) {
     mysqli_query($sqlconnection, "DELETE FROM ". $config["sqlTable"] . " WHERE id= " . mysqli_real_escape_string($sqlconnection, $_GET["delete"]));
 }
-echo var_dump(mysqli_query($sqlconnection, "SELECT * FROM events;"));
+
+$events = mysqli_query($sqlconnection, "SELECT * FROM events;");
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WUNDERSCHÖNE MANAGEMENT SEITE</title>
+</head>
+<body>
+<table>
+<?php
+while ($r = mysqli_fetch_assoc($events)) {
+    ?>
+    <tr>
+        <td>
+            <?php echo $r["id"]; ?>
+        </td>
+        <td>
+            <?php echo $r["day"]; ?>
+        </td>
+        <td>
+            <?php echo $r["month"]; ?>
+        </td>
+        <td>
+            <?php echo $r["type"]; ?>
+        </td>
+        <td>
+            <?php echo $r["image"]; ?>
+        </td>
+        <td>
+            <?php echo $r["link"]; ?>
+        </td>
+        <td>
+            <a href="?delete=<?php echo $r["id"]; ?>">Delete</a>
+        </td>
+    </tr>
+    <?php
+}
+    ?>
+</table>
+</body>
+</html>
