@@ -1,6 +1,7 @@
 /**
  * Created by mcwmc on 28.05.2016.
  */
+var template = "";
 var express = require("express");
 var fs = require("fs");
 var config = JSON.parse(fs.readFileSync("config.json", "utf8"));
@@ -163,7 +164,7 @@ if (cluster.isMaster) {
 
             });
             console.log("Next Up:" + nextup);
-            var template = fs.readFileSync("assets/html/main.html", "utf8")
+            template = fs.readFileSync("assets/html/main.html", "utf8")
                 .replace("[[TABLE]]", buildstring)
                 .replace("[[HEADER]]", calendar.month_name[currMonth])
                 .replace("[[NEXTUP]]", nextup)
