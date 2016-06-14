@@ -97,7 +97,8 @@ if (cluster.isMaster) {
                     .replace("[[LEGENDE]]", legende);
 
             });
-    })};
+    })}
+    setInterval(reloadtemplate(), 5000);
     var cal = new calendar.Calendar(calendar.MONDAY);
     var d = new Date();
     var currMonth = d.getMonth() + 1;
