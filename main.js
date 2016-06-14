@@ -98,7 +98,10 @@ if (cluster.isMaster) {
 
             });
     })}
-    setInterval(reloadtemplate(), 5000);
+    setInterval(function() {
+        reloadtemplate();
+        console.log("Reloading Template...");
+    }, 5000);
     var cal = new calendar.Calendar(calendar.MONDAY);
     var d = new Date();
     var currMonth = d.getMonth() + 1;
