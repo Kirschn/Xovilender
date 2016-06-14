@@ -79,14 +79,14 @@ if (cluster.isMaster) {
                 console.log("For loop!");
                 if (results[i] !== undefined) {
                     nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].type + "</div>";
-                    nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100%; width: 100%;' src='" + results[i].image + "'></div></div>";
+                    nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100px; width: 100%;' src='" + results[i].image + "'></div></div>";
                 }
             }
             sqlconnection.query("SELECT DISTINCT image, `desc` FROM events", function (err, types) {
                 var legende = "";
                 types.forEach(function (currentType) {
                     legende +=  "<div class='nextupentry'>";
-                    legende += "<div class='nextuplogo'><img style='height: 100%;' src='" + currentType.image + "'></div>";
+                    legende += "<div class='nextuplogo'><img style='height: 100px;' src='" + currentType.image + "'></div>";
                     legende += "<div class='legendetext'>" + currentType.desc + "</div></div>"
 
                 });
@@ -152,7 +152,7 @@ if (cluster.isMaster) {
             console.log("For loop!");
             if (results[i] !== undefined) {
                 nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].type + "</div>";
-                nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100%; width: 100%;' src='" + results[i].image + "'></div></div>";
+                nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100px; width: 100%;' src='" + results[i].image + "'></div></div>";
             }
         }
         sqlconnection.query("SELECT DISTINCT image, `desc` FROM events", function (err, types) {
