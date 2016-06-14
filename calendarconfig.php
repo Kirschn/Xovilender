@@ -87,9 +87,9 @@ while ($r = mysqli_fetch_assoc($events)) {
 <form method="POST" action="/">
     <label for="day">Day:</label><input name="day" id="day" placeholder="21"><br>
     <label for="month">Month:</label><input name="month" id="month" placeholder="6"><br>
-    <label for="type">Type:</label><input name="type" id="type" placeholder="Twitch"><br>
+    <label for="type">Type (Platform):</label><input name="type" id="type" placeholder="Twitch"><br>
     <label for="desc">Desc:</label><input name="desc" id="desc" placeholder="Casual Stream"><br>
-    <label for="imageurl">Image URL:</label><input name="imageurl" id="imageurl" placeholder="http://mun-1.cdn.spaceflow.io/b9g2hmkbs8ftiefgg62c.png"><br>
+    <label for="imageurl">Image URL (Upload Images here: <a href="http://sharepic.moe">sharepic.moe</a>, use the /raw Link, image has to be 100x100px):</label><input name="imageurl" id="imageurl" placeholder="http://mun-1.cdn.spaceflow.io/b9g2hmkbs8ftiefgg62c.png"><br>
     <label for="link">URL:</label><input name="link" id="link" placeholder="http://youtube.com/yavigin"><br>
     <input type="submit">
 </form>
