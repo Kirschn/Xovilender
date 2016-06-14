@@ -8,9 +8,11 @@
  */
 session_start();
 if(!isset($_SESSION["kbot_managementbot"])) {
+    echo "NO SESSION";
     die();
-} else {
+    } else {
     if ($_SESSION["kbot_managementbot"] !== "#xovigin") {
+        echo "WRONG BOT";
         die();
     }
 }
