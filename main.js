@@ -57,12 +57,19 @@ if (cluster.isMaster) {
                     console.log("Current Day Array: " + currDayIteration);
                     if (currDayIteration !== 0) {
                         buildstring += "<td><div class='calendarDate'>" + currDayIteration + "";
+                        var eventcounter = 0
+                        events.forEach(function (currEvent) {
+                            if (currEvent.day == currDayIteration) {
+                                eventcounter++;
+                            }
+                        }
+                        var heightwidth = 100 / eventcounter;
                         events.forEach(function (currEvent) {
 
                             if (currEvent.day == currDayIteration) {
                                 console.log("Event");
                                 buildstring += "<div class='calendarEvent'><a href='" + currEvent.link + "' title='" + currEvent.desc + "'><img src='" +
-                                    currEvent.image + "' height='100px'></a></div>";
+                                    currEvent.image + "' height='" + eventcounter +"px'></a></div>";
                             }
                         });
                         buildstring += "</div></td>";
