@@ -57,7 +57,7 @@ if (cluster.isMaster) {
                     console.log("Current Day Array: " + currDayIteration);
                     if (currDayIteration !== 0) {
                         buildstring += "<td><div class='calendarDate'>" + currDayIteration + "";
-                        var eventcounter = 0
+                        var eventcounter = 0;
                         events.forEach(function (currEvent) {
                             if (currEvent.day == currDayIteration) {
                                 eventcounter++;
