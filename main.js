@@ -63,7 +63,7 @@ if (cluster.isMaster) {
                                 eventcounter++;
                             }
                         }
-                        var heightwidth = 100 / eventcounter;
+                        var heightwidth = (100 / eventcounter);
                         events.forEach(function (currEvent) {
 
                             if (currEvent.day == currDayIteration) {
