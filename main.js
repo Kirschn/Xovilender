@@ -35,7 +35,9 @@ if (cluster.isMaster) {
         currMonth = d.getMonth() + 1;
         currDay = d.getDay();
         table = cal.monthdayscalendar(d.getFullYear(), currMonth);
-        sqlconnection.query("SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;", function (err, results) {
+        var sqlquery = "SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;";
+        console.log("DEBUG SQL QUERY: " + sqlquery);
+        sqlconnection.query(sqlquery, function (err, results) {
             if (err) throw err;
             var events = results;
             console.log(results);
