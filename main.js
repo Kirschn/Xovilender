@@ -93,8 +93,8 @@ if (cluster.isMaster) {
                 console.log("For loop!");
                 if (nextupresults[i] !== undefined) {
                     if (nextupresults[i].day !== 40) {
-                        nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].type + "</div>";
-                        nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100px;' src='" + results[i].image + "'></div></div>";
+                        nextup += "<div class='nextupentry'><b>" + nextupresults[i].day + "." + nextupresults[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  nextupresults[i].type + "</div>";
+                        nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100px;' src='" + nextupresults[i].image + "'></div></div>";
                     }
                 }
             }
