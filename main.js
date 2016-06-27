@@ -29,10 +29,12 @@ if (cluster.isMaster) {
     });
     // Workers can share any TCP connection
     // In this case it is an HTTP server
-    function reloadtemplate() {
+    function reloadtemplate(month) {
         cal = new calendar.Calendar(calendar.MONDAY);
         d = new Date();
-        currMonth = d.getMonth() + 1;
+        if (month == undefined) {
+            currMonth = d.getMonth() + 1;
+        }
         currDay = d.getDay();
         table = cal.monthdayscalendar(d.getFullYear(), currMonth);
         var sqlquery = "SELECT day, type, image, `desc`, month, link FROM events WHERE month LIKE " + mysql.escape(currMonth) + " ORDER BY day ASC, month ASC;";
@@ -84,10 +86,13 @@ if (cluster.isMaster) {
             });
 
             var nextup = "";
+            var sqlquery = "SELECT day, type, image, `desc`, month, link FROM events ORDER BY day ASC, month ASC;";
+            console.log("DEBUG SQL QUERY: " + sqlquery);
+            sqlconnection.query(sqlquery, function (err, nextupresults) {
             for (i = 0; i < 3; i++) {
                 console.log("For loop!");
-                if (results[i] !== undefined) {
-                    if (results[i].day !== 40) {
+                if (nextupresults[i] !== undefined) {
+                    if (nextupresults[i].day !== 40) {
                         nextup += "<div class='nextupentry'><b>" + results[i].day + "." + results[i].month  +".</b><div class='nextupdesc' style='position: absolute; bottom: 0;'>" +  results[i].type + "</div>";
                         nextup += "<div class='nextuplogo' style='position: absolute; top: 0; right: 0;'><img style='height: 100px;' src='" + results[i].image + "'></div></div>";
                     }
@@ -109,7 +114,7 @@ if (cluster.isMaster) {
                     .replace("[[LEGENDE]]", legende);
 
             });
-    })}
+    })})}
     setInterval(function() {
         reloadtemplate();
         console.log("Reloading Template...");
