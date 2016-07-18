@@ -86,7 +86,7 @@ if (cluster.isMaster) {
             });
 
             var nextup = "";
-            var sqlquery = "SELECT day, type, image, `desc`, month, link FROM events ORDER BY day ASC, month ASC;";
+            var sqlquery = "SELECT day, type, image, `desc`, month, link FROM events WHERE day >= " + currDay + " AND month >= " + currMonth + " ORDER BY day ASC, month ASC;";
             console.log("DEBUG SQL QUERY: " + sqlquery);
             sqlconnection.query(sqlquery, function (err, nextupresults) {
             for (i = 0; i < 3; i++) {
